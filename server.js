@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const openGraphCheck = require("open-graph-scraper");
+const port = process.ENV.port || 6060;
 
 // middleware
 app.use(bodyParser.json());
@@ -76,6 +77,6 @@ app.post("/get-og-images", (req, res) => {
   });
 });
 
-app.listen(6060, () => {
-  console.log(`Server is running on port 6060.`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}.`);
 });
