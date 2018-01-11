@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const puppeteer = require("puppeteer");
 const bodyParser = require("body-parser");
 const openGraphCheck = require("open-graph-scraper");
 
