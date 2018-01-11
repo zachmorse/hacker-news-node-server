@@ -5,8 +5,7 @@
     "An app which takes url inputs and returns open-graph images for the inputs",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Zachary Morse",
   "license": "ISC",
