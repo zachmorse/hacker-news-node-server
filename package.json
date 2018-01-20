@@ -9,7 +9,9 @@
   "author": "Zachary Morse",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "open-graph-scraper": "^3.1.4"
