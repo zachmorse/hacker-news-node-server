@@ -1,7 +1,7 @@
 //
 //
 function validityChecker(input = "dummy") {
-  if (input.slice(0, 4) !== "http") {
+  if (input === null || input.slice(0, 4) !== "http") {
     return false;
   } else {
     return true;
