@@ -10,31 +10,21 @@ function getStories(url) {
   return query;
 }
 
+function timeBang() {
+  let time = new Date();
+  console.log(time);
+}
+setInterval(timeBang, 1000);
+
 getTopStoriesRouter.get("/", (req, res) => {
   (async () => {
-    const itemBaseURL = "https://hacker-news.firebaseio.com/v0/item/";
-    const itemURLsuffix = ".json?print=pretty";
-
-    // grab array of story ids
     const response = await axios.get(
-      "https://hacker-news.firebaseio.com/v0/item/16238765.json?print=pretty"
+      "https://hacker-news.firebaseio.com/v0/topstories.json"
     );
-    const storyIndex = response.data;
-
+    const masterStoryIndex = response.data;
     // for each id, retrieve the story
 
-    // let results = Promise.all(
-    //   storyIndex.forEach((element, index) => {
-    //     getStories(itemBaseURL + element + itemURLsuffix);
-    //   })
-    // )
-    //   .then(results => {
-    //     console.log("stuff");
-    //   })
-    //   .catch(error => {
-    //     console.log("ERROR:", error);
-    //   });
-    res.send(storyIndex);
+    res.send(masterStoryIndex);
   })();
 });
 

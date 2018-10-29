@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const openGraphCheck = require("open-graph-scraper");
 const cors = require("cors");
 const compression = require("compression");
 const port = process.env.PORT || 6060;
@@ -11,7 +10,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(compression());
 
-// route requirements
+// routes
 
 const getOgImages = require("./routes/getOgImages");
 const getTopStories = require("./routes/getTopStories");
