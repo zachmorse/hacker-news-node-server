@@ -1,5 +1,5 @@
-//
-//
+// ---------------------------------------------------------
+// ---------------------------------------------------------
 function validityChecker(input = "dummy") {
   if (input === null || input.slice(0, 4) !== "http") {
     return false;
@@ -8,11 +8,17 @@ function validityChecker(input = "dummy") {
   }
 }
 
+// ---------------------------------------------------------
+// ---------------------------------------------------------
+
 function randomImage() {
   let imageNum = Math.floor(Math.random() * 1084);
   let imageURL = "https://picsum.photos/300/200?image=";
   return imageURL.concat(imageNum);
 }
+
+// ---------------------------------------------------------
+// ---------------------------------------------------------
 
 function imageSourcer(input, index) {
   if (input.hasOwnProperty("ogImage") === true) {
@@ -25,6 +31,9 @@ function imageSourcer(input, index) {
     return randomImage();
   }
 }
+
+// ---------------------------------------------------------
+// ---------------------------------------------------------
 
 module.exports = {
   randomImage: randomImage,

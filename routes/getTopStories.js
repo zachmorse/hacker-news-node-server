@@ -2,30 +2,52 @@ const express = require("express");
 const axios = require("axios");
 const getTopStoriesRouter = express.Router();
 
-function getStories(url) {
-  let stories = [];
-  let query = axios.get(url).then((error, response) => {
-    stories.push(response);
-  });
-  return query;
+// set global variable for the cache and populate it
+
+let topStoriesMasterArray = [];
+
+// functions to populate cache
+
+async function topStories() {
+  let results = await getStoryIndex();
+  let stories = await getIndividualStories(results);
+  topStoriesMasterArray = stories;
 }
 
-function timeBang() {
-  let time = new Date();
-  console.log(time);
+async function getStoryIndex() {
+  const response = await axios.get(
+    "https://hacker-news.firebaseio.com/v0/topstories.json"
+  );
+  return response.data;
 }
-setInterval(timeBang, 1000);
+
+async function getIndividualStories(list) {
+  let masterList = [];
+  let stories = await list.forEach(element => {
+    axios
+      .get(
+        `https://hacker-news.firebaseio.com/v0/item/${element}.json?print=pretty`
+      )
+      .then(response => {
+        masterList.push(response.data);
+      })
+      .catch(err => {
+        console.log("ERROR", err);
+      });
+  });
+  return masterList;
+}
+
+// ---------------------------------------------
+// ---------------------------------------------
+
+setInterval(topStories, 10000);
+
+// ---------------------------------------------
+// ---------------------------------------------
 
 getTopStoriesRouter.get("/", (req, res) => {
-  (async () => {
-    const response = await axios.get(
-      "https://hacker-news.firebaseio.com/v0/topstories.json"
-    );
-    const masterStoryIndex = response.data;
-    // for each id, retrieve the story
-
-    res.send(masterStoryIndex);
-  })();
+  res.send(topStoriesMasterArray);
 });
 
 module.exports = getTopStoriesRouter;

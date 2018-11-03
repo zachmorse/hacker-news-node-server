@@ -23,7 +23,11 @@ app.get("/", (req, res) => {
   );
 });
 
-app.use("/get-og-images", getOgImages);
+// app.get("/topstories", (req, res) => {
+//   res.send("top stories");
+// });
+
+// app.use("/get-og-images", getOgImages);
 app.use("/topstories", getTopStories);
 
 app.listen(port, () => {
