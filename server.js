@@ -14,6 +14,8 @@ app.use(compression());
 
 const getOgImages = require("./routes/getOgImages");
 const getTopStories = require("./routes/getTopStories");
+const getNewestStories = require("./routes/getNewStories");
+const getBestStories = require("./routes/getBestStories");
 
 // routes
 
@@ -29,6 +31,8 @@ app.get("/", (req, res) => {
 
 // app.use("/get-og-images", getOgImages);
 app.use("/topstories", getTopStories);
+app.use("/newest", getNewestStories);
+app.use("/best", getBestStories);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}.`);
