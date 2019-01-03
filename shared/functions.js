@@ -35,7 +35,42 @@ function imageSourcer(input, index) {
 // ---------------------------------------------------------
 // ---------------------------------------------------------
 
+async function getStories(url) {
+  let masterArray = [];
+  let results = await getStoryIndex(url);
+  let stories = await getIndividualStories(results);
+  masterArray = stories;
+}
+
+async function getStoryIndex() {
+  const response = await axios.get(
+    "https://hacker-news.firebaseio.com/v0/topstories.json"
+  );
+  return response.data;
+}
+
+async function getIndividualStories(list) {
+  let masterList = [];
+  let stories = await list.forEach(element => {
+    axios
+      .get(
+        `https://hacker-news.firebaseio.com/v0/item/${element}.json?print=pretty`
+      )
+      .then(response => {
+        masterList.push(response.data);
+      })
+      .catch(err => {
+        console.log("ERROR", err);
+      });
+  });
+  return masterList;
+}
+
+// ---------------------------------------------------------
+// ---------------------------------------------------------
+
 module.exports = {
   randomImage: randomImage,
-  imageSourcer: imageSourcer
+  imageSourcer: imageSourcer,
+  retrieveStories: getStories
 };
